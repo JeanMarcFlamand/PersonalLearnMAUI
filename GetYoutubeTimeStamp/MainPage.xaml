@@ -6,6 +6,7 @@
         <StackLayout>
             <WebView x:Name="webView" 
                      Source="https://www.youtube.com/watch?v=GZGFlyaqWbA"
+                    
                     MinimumWidthRequest="500" 
                     MinimumHeightRequest="500"
                     HorizontalOptions="StartAndExpand"
@@ -14,8 +15,18 @@
 
         <StackLayout Orientation="Horizontal">
                 <Button Text="Get Value" Clicked="OnGetValueClicked" />
-                <Label x:Name="valueLabel" />
+                
             </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Result from using HtmlAgilityPack : "
+                   BackgroundColor="Yellow"></Label>
+            <Label x:Name="valueLabel" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Result from using GetStringBetween method : "
+                   BackgroundColor="Yellow"></Label>
+            <Label x:Name="valueLabel2" />
+        </StackLayout>
 
     </VerticalStackLayout>
 
