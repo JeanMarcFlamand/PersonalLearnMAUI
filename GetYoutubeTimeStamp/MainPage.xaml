@@ -1,34 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GetYoutubeTimeStamp.MainPage">
-    <VerticalStackLayout>
-        <StackLayout>
-            <WebView x:Name="webView" 
-                     Source="https://www.youtube.com/watch?v=GZGFlyaqWbA"
-                    
-                    MinimumWidthRequest="500" 
-                    MinimumHeightRequest="500"
-                    HorizontalOptions="StartAndExpand"
-                    VerticalOptions="StartAndExpand"/>
-        </StackLayout>
+<ContentPage
+    x:Class="GetYoutubeTimeStamp.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Grid ColumnDefinitions="*, *" RowDefinitions="*, Auto, Auto, Auto">
 
-        <StackLayout Orientation="Horizontal">
-                <Button Text="Get Value" Clicked="OnGetValueClicked" />
-                
-            </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Result from using HtmlAgilityPack : "
-                   BackgroundColor="Yellow"></Label>
-            <Label x:Name="valueLabel" />
-        </StackLayout>
-        <StackLayout Orientation="Horizontal">
-            <Label Text="Result from using GetStringBetween method : "
-                   BackgroundColor="Yellow"></Label>
-            <Label x:Name="valueLabel2" />
-        </StackLayout>
+        <WebView
+            x:Name="webView"
+            Grid.Row="0"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            HorizontalOptions="FillAndExpand"
+            MinimumHeightRequest="500"
+            MinimumWidthRequest="500"
+            Source="https://www.youtube.com/watch?v=GZGFlyaqWbA"
+            VerticalOptions="FillAndExpand" />
 
-    </VerticalStackLayout>
+        <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Clicked="OnGetValueClicked"
+            HorizontalOptions="Center"
+            Text="Get Value" />
+
+        <Label
+            x:Name="HtmlAgilityPackDescription"
+            Grid.Row="2"
+            Grid.Column="0"
+            BackgroundColor="Yellow"
+            HorizontalOptions="End"
+            Margin="0,0,10,0"
+            Text="Result from using HtmlAgilityPack : "
+            VerticalOptions="Center" />
+        <Label
+            x:Name="HtmlAgilityPackValue"
+            Grid.Row="2"
+            Grid.Column="1"
+            HorizontalOptions="Start"
+            VerticalOptions="Center" />
+
+        <Label
+            x:Name="GetStringBetweenDescription"
+            Grid.Row="3"
+            Grid.Column="0"
+            BackgroundColor="Yellow"
+            HorizontalOptions="End"
+            Margin="0,0,10,0"
+            Text="Result from using GetStringBetween method : "
+            VerticalOptions="Center" />
+        <Label
+            x:Name="GetStringBetweenvalue"
+            Grid.Row="3"
+            Grid.Column="1"
+            HorizontalOptions="Start"
+            VerticalOptions="Center" />
+
+    </Grid>
+
 
 
 </ContentPage>

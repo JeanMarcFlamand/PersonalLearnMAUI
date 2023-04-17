@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using AngleSharp.Io;
+using HtmlAgilityPack;
 using System.Globalization;
 using System.Text.RegularExpressions;
 
@@ -23,12 +24,17 @@ namespace GetYoutubeTimeStamp
 
 
                 // Unescape that damn Unicode Java bull.
+                // ref  https://github.com/xamarin/Xamarin.Forms/issues/11648#issuecomment-673196372
                 content = Regex.Replace(content, @"\\[Uu]([0-9A-Fa-f]{4})", m => char.ToString((char)ushort.Parse(m.Groups[1].Value, NumberStyles.AllowHexSpecifier)));
                 content = Regex.Unescape(content);
-                var contentlenght = content.Length;
 
-                //Replace the content by hardcoded content for test purpose
-                content = "</path></svg></span><span><span class=\"ytp-time-current\">0:00</span><span class=\"ytp-time-separator\"> / </span><span class=\"ytp-time-duration\">0:23</span></span><span class=\"ytp-clip-watch-full-video-button-separator\">•</span><span class=\"ytp-clip-watch-full-video-button\">Watch full video</span><button class=\"ytp-live-badge ytp-button\" disabled=\"true\">Live</button></div><div class=\"ytp-chapter-container\" style=\"display: none;\"><button class=\"ytp-chapter-title ytp-button ";
+                if (content.Equals("\"null\""))
+                    content = null;
+
+                else if (content.StartsWith("\"") && content.EndsWith("html>"))
+                    content = content.Substring(1, content.Length - 2);
+
+                var contentlenght = content.Length;
 
                 //First method use HtmlAgilityPack
                 //Load the HTML content into an HtmlDocument object
@@ -43,15 +49,15 @@ namespace GetYoutubeTimeStamp
                 string value = element?.InnerText.Trim();
 
                 // Display the value in the label on the page
-                valueLabel.Text = value ?? "Element not found";
+                HtmlAgilityPackValue.Text = value ?? "Element not found";
 
 
                 
                 //Alternative method to get the value
-                string startString = "<span class=\"ytp-time-current\">"; //ok
+                string startString = "<span class=\\\"ytp-time-current\\\">"; //ok
                 string endString = "</span>"; //ok
 
-                valueLabel2.Text = GetStringBetween(content, startString, endString);
+                GetStringBetweenvalue.Text = GetStringBetween(content, startString, endString);
             }
         }
 
